@@ -1,6 +1,8 @@
 services:
   r1:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerFile
     stdin_open: true
     tty: true
     cap_add:
@@ -16,7 +18,9 @@ services:
 
 
   r2:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerFile
     stdin_open: true
     tty: true
     cap_add:
@@ -30,7 +34,9 @@ services:
 
 
   r3:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerFile
     stdin_open: true
     tty: true
     cap_add:
@@ -46,7 +52,9 @@ services:
 
 
   r4:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerFile
     stdin_open: true
     tty: true
     cap_add:
