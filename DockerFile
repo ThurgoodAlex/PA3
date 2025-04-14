@@ -1,0 +1,15 @@
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get -y install bash iproute2 net-tools tcpdump vim iputils-ping curl gnupg lsb-release
+RUN apt-get clean
+
+# adding FRR 
+RUN curl -s https://deb.frrouting.org/frr/keys.gpg | tee /usr/share/keyrings/frrouting.gpg > /dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/frrouting.gpg] https://deb.frrouting.org/frr $(lsb_release -s -c) frr-stable" | tee /etc/apt/sources.list.d/frr.list
+RUN apt-get update && \
+apt-get -y install frr frr-pythontools && \
+apt-get clean
+
+
+CMD ["bash"]
