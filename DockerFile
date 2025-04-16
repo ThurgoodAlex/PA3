@@ -11,5 +11,8 @@ RUN apt-get update && \
 apt-get -y install frr frr-pythontools && \
 apt-get clean
 
+# setting ospfd 
+RUN sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons && \
+    echo 'log file /var/log/frr.log' >> /etc/frr/frr.conf
 
 CMD ["bash"]
