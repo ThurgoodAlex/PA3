@@ -57,18 +57,25 @@ def add_routes():
 def add_r1():
     name = routers["R1"]["container_name"]
     subprocess.run(f"docker exec -it {name} route add -net 10.0.11.0/24 gw 10.0.10.3", shell=True, check=True)
-    subprocess.run(f"docker exec -it {name} route add -net 10.0.12.0/24 gw 10.0.13.4", shell=True, check=True)
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.12.0/24 gw 10.0.13.3", shell=True, check=True)
     print("R1 routes added successfully")
 
 def add_r2():
     name = routers["R2"]["container_name"] 
-    subprocess.run(f"")
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.15.0/24 gw 10.0.11.4", shell=True, check=True)
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.14.0/24 gw 10.0.10.4", shell=True, check=True)
+    print("R2 routes added successfully")
+
 def add_r3():
     name = routers["R3"]["container_name"]
-    subprocess.run(f"")
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.14.0/24 gw 10.0.12.4", shell=True, check=True)  
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.10.0/24 gw 10.0.11.3", shell=True, check=True)
+    print("R3 routes added successfully")
 
 def add_r4():
     name = routers["R4"]["container_name"]
-    subprocess.run(f"")
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.11.0/24 gw 10.0.12.3", shell=True, check=True)
+    subprocess.run(f"docker exec -it {name} route add -net 10.0.15.0/24 gw 10.0.12.3", shell=True, check=True)
+    print("R4 routes added successfully")
 
 #show ip ospf interface in vtysh and copy that into a new one that paste into dockerfile or python script
