@@ -12,6 +12,9 @@ apt-get -y install frr frr-pythontools && \
 apt-get clean
 
 
+COPY frr-r2.conf /etc/frr/frr.conf
+
+
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
