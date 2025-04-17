@@ -79,3 +79,6 @@ def add_r4():
     print("R4 routes added successfully")
 
 #show ip ospf interface in vtysh and copy that into a new one that paste into dockerfile or python script
+
+if __name__ == "__main__":
+    add_routes()
