@@ -1,7 +1,7 @@
 services:
   r1:
     build:
-      context: .
+      context: ./r1
       dockerfile: r1_DockerFile
     stdin_open: true
     tty: true
@@ -19,7 +19,7 @@ services:
 
   r2:
     build:
-      context: .
+      context: ./r2
       dockerfile: r2_DockerFile
     stdin_open: true
     tty: true
@@ -35,7 +35,7 @@ services:
 
   r3:
     build:
-      context: .
+      context: ./r3
       dockerfile: r3_DockerFile
     stdin_open: true
     tty: true
@@ -53,7 +53,7 @@ services:
 
   r4:
     build:
-      context: .
+      context: ./r4
       dockerfile: r4_DockerFile
     stdin_open: true
     tty: true
