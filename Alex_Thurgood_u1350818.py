@@ -58,7 +58,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--docker-build",
         action="store_true",
-        help="Build the docker containers."
+        help="Build the docker containers. This installs frr, sets the original ospf weights and the network topology."
     )
     parser.add_argument(
         "--docker-up",
