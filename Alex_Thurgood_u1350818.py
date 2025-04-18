@@ -64,22 +64,21 @@ def ospf_south():
     print("Changed to southern path")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="automating the ability to change the ospf .")
+    parser = argparse.ArgumentParser(
+    description="run -add-routes to add the routes from the hosts to the network. run -north to change the path to R -> R2 -> R3 and run -south to change the path to R1 -> R4 -> R3")
     parser.add_argument(
-        "-add-routes",
+        "--add-routes",
+        action="store_true",
+        help="Add static routes from the hosts to the network."
     )
+
     parser.add_argument(
-        "-h",
-        action="help",
-        help="run -add-routes to add the routes from the hosts to the network. run -north to change the path to R -> R2 -> R3 and run -south to change the path to R1 -> R4 -> R3",
-    )
-    parser.add_argument(
-        "-north",
+        "--north",
         action="store_true",
         help="Set OSPF route to use R1 → R2 → R3"
     )
     parser.add_argument(
-        "-south",
+        "--south",
         action="store_true",
         help="Set OSPF route to use R1 → R4 → R3"
     )
