@@ -63,6 +63,15 @@ def ospf_south():
     subprocess.run(f"docker exec -it pa3-r1-1 vtysh -c 'write memory'", shell=True, check=True)
     print("Changed to southern path")
 
+def docker_build():
+    subprocess.run("docker compose build", shell=True, check=True)
+    print("Docker containers built successfully")
+
+
+def docker_up():
+    subprocess.run("docker compose up -d", shell=True, check=True)
+    print("Docker containers built successfully")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -82,10 +91,28 @@ if __name__ == "__main__":
         action="store_true",
         help="Set OSPF route to use R1 → R4 → R3"
     )
+    parser.add_argument(
+        "--docker-build",
+        action="store_true",
+        help="Build the docker containers."
+    )
+    parser.add_argument(
+        "--docker-up",
+        action="store_true",
+        help="Start the docker containers."
+    )
     args = parser.parse_args()
 
     if args.add_routes:
         add_routes()
+    elif args.north:
+        ospf_north()
+    elif args.south:
+        ospf_south() 
+    elif args.docker_build:
+        docker_build()
+    elif args.docker_up:
+        docker_up()
     else:
         parser.print_help()
 
