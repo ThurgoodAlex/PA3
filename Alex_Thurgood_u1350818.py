@@ -1,5 +1,6 @@
 import subprocess
 import argparse
+import time
 
 hosts = {
     "pa3-ha-1": {"ip": "10.0.15.0/24", "gw": "10.0.14.4"},
@@ -47,6 +48,7 @@ def ospf_north():
     subprocess.run("docker exec pa3-r3-1 vtysh -c 'clear ip ospf process'", shell=True)
     for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
         subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
+        time.sleep(5)
     print("Changed to northern path")
 
 
@@ -61,6 +63,7 @@ def ospf_south():
     subprocess.run("docker exec pa3-r3-1 vtysh -c 'clear ip ospf process'", shell=True)
     for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
         subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
+        time.sleep(5)
     print("Changed to southern path")
 
 def docker_build():
