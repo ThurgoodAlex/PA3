@@ -43,9 +43,9 @@ def ospf_north():
     set_ospf_cost("pa3-r1-1", "10.0.13.4", 50)  # R1 → R4
     set_ospf_cost("pa3-r2-1", "10.0.11.3", 2)   # R2 → R3
     set_ospf_cost("pa3-r4-1", "10.0.12.4", 50)  # R4 → R3
-    subprocess.run("docker exec pa3-r1-1 vtysh -c 'clear ip ospf process'", shell=True)
-    subprocess.run("docker exec pa3-r2-1 vtysh -c 'clear ip ospf process'", shell=True)
-    subprocess.run("docker exec pa3-r4-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r1-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r2-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r4-1 vtysh -c 'clear ip ospf process'", shell=True)
     print("Changed to northern path")
 
 
@@ -55,9 +55,9 @@ def ospf_south():
     set_ospf_cost("pa3-r1-1", "10.0.13.4", 2)
     set_ospf_cost("pa3-r2-1", "10.0.11.3", 50)
     set_ospf_cost("pa3-r4-1", "10.0.12.4", 2)
-    subprocess.run("docker exec pa3-r1-1 vtysh -c 'clear ip ospf process'", shell=True)
-    subprocess.run("docker exec pa3-r2-1 vtysh -c 'clear ip ospf process'", shell=True)
-    subprocess.run("docker exec pa3-r4-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r1-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r2-1 vtysh -c 'clear ip ospf process'", shell=True)
+    # subprocess.run("docker exec pa3-r4-1 vtysh -c 'clear ip ospf process'", shell=True)
     print("Changed to southern path")
 
 def docker_build():
