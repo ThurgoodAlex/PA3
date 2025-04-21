@@ -3,6 +3,9 @@ Then you can run 'python3 Alex_Thurgood_u1350818.py --docker-build' and  'python
 After that's done, you'll be able to run 'docker ps' to find the container names.
 
 run 'python3 Alex_Thurgood_u1350818.py -h' to find the list of commands that can be run, but
+
    --add-routes, connects the Hosts to the network
+   
    --north, sends the packets from  HostA through the path R1 -> R2 -> R3 to HostB
+   
    --south, sends the packets from HostA through the path R1 -> R4 -> R3 to HostB
