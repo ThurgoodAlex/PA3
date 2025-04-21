@@ -15,18 +15,34 @@ def add_routes():
     print("Host routes added successfully")
 
 
+
+def get_eth_by_name(name, ip):
+    # Get the ethernet interface name by IP address
+    result = subprocess.run(f"docker exec -it {name} ip addr show | grep {ip}", shell=True, check=True, capture_output=True, text=True)
+    for line in result.stdout.splitlines():
+        parts = line.split()
+        ip_addr = parts[3] 
+        if ip_addr.startswith(ip):
+            return parts[1] 
+    return None
+
+
 def ospf_north():
     # Set OSPF route to use R1 → R2 → R3
-    subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth0' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
-    subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth2' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
+    r2_interface = get_eth_by_name("pa3-r1-1", "10.0.10.4")
+    r4_interface = get_eth_by_name("pa3-r1-1", "10.0.10.4")
+    subprocess.run(f"docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface {r2_interface}' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
+    subprocess.run(f"docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface {r4_interface}' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'write memory'", shell=True, check=True)
     print("Changed to northern path")
 
 
 def ospf_south():
     # Set OSPF route to use R1 → R4 → R3
-    subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth0' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
-    subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth2' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
+    r2_interface = get_eth_by_name("pa3-r1-1", "10.0.10.4")
+    r4_interface = get_eth_by_name("pa3-r1-1", "10.0.10.4")
+    subprocess.run(f"docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface {r2_interface}' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
+    subprocess.run(f"docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface {r4_interface}' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'write memory'", shell=True, check=True)
     print("Changed to southern path")
 
