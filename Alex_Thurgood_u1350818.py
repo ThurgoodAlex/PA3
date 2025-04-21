@@ -46,10 +46,10 @@ def ospf_north():
     set_ospf_cost("pa3-r4-1", "10.0.12.4", 50) 
     set_ospf_cost("pa3-r3-1", "10.0.11.4", 2)  
     set_ospf_cost("pa3-r3-1", "10.0.12.3", 50) 
-    for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
-        subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
-        time.sleep(5)
-    time.sleep(5)
+    # for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
+    #     subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
+    #     time.sleep(5)
+    # time.sleep(5)
     print("Changed to northern path")
 
 
@@ -61,10 +61,10 @@ def ospf_south():
     set_ospf_cost("pa3-r4-1", "10.0.12.4", 2)
     set_ospf_cost("pa3-r3-1", "10.0.11.4", 50)
     set_ospf_cost("pa3-r3-1", "10.0.12.3", 2)
-    for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
-        subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
-        time.sleep(5)
-    time.sleep(5)
+    # for router in ["pa3-r1-1", "pa3-r2-1", "pa3-r3-1", "pa3-r4-1"]:
+    #     subprocess.run(f"docker exec {router} vtysh -c 'clear ip ospf process'", shell=True)
+    #     time.sleep(5)
+    # time.sleep(5)
     print("Changed to southern path")
 
 def docker_build():
