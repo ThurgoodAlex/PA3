@@ -64,7 +64,7 @@ def ospf_south():
     set_ospf_cost("pa3-r3-1", "10.0.11.4", 50)
     set_ospf_cost("pa3-r3-1", "10.0.12.3", 2)
     write_memory()
-    subprocess.run("docker exec pa3-r3-1 vtysh -c 'clear ip ospf route'", shell=True, check=True)
+    subprocess.run("docker exec pa3-r3-1 vtysh -c 'clear ip ospf process'", shell=True, check=True)
     print("Changed to southern path")
 
 def docker_build():
