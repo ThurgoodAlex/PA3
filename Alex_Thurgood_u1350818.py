@@ -7,6 +7,7 @@ hosts = {
 }
 
 def add_routes():
+    # Add static routes from the hosts to the network
     for host, config in hosts.items():
         ip = config["ip"]
         gw = config["gw"]
@@ -15,6 +16,7 @@ def add_routes():
 
 
 def ospf_north():
+    # Set OSPF route to use R1 → R2 → R3
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth1' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth2' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'write memory'", shell=True, check=True)
@@ -23,21 +25,27 @@ def ospf_north():
 
 
 def ospf_south():
+    # Set OSPF route to use R1 → R4 → R3
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth1' -c 'ip ospf cost 2' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'configure terminal' -c 'interface eth2' -c 'ip ospf cost 20' -c 'end'", shell=True, check=True)
     subprocess.run("docker exec -it pa3-r1-1 vtysh -c 'write memory'", shell=True, check=True)
     print("Changed to southern path")
 
 def docker_build():
+    # Build the docker containers
+    # This installs frr, sets the original ospf weights and the network topology.
     subprocess.run("docker compose build", shell=True, check=True)
     print("Docker containers built successfully")
 
 
 def docker_up():
+    # Start the docker containers
     subprocess.run("docker compose up -d", shell=True, check=True)
     print("Docker containers built successfully")
 
 if __name__ == "__main__":
+    # Create the argument parser
+    # This allows the user to specify which function to run from the command line.
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
